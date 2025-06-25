@@ -14,7 +14,7 @@ from UNet import Unet
 import utils
 import engine
 from learning_rate_range_test import LRTest
-
+from ade20k_dataloader import ADE20K, ADE20K_palette
 
 def setup_logging(log_dir: str = './logs'):
     os.makedirs(log_dir, exist_ok=True)
@@ -229,7 +229,7 @@ class SegmentationTrainer:
 
 
 def create_data_loaders(config: TrainingConfig):
-    import ADE20K  # replace with actual import
+    
 
     train_loader = ADE20K(
         data_dir=config.data_dir,
