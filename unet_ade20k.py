@@ -11,11 +11,11 @@ import time
 from typing import Tuple, List, Optional
 import logging
 
-# Your existing imports (assuming these modules exist)
-# from UNet import Unet
-# import utils
-# import engine
-# from learning_rate_range_test import LRTest
+
+from UNet import Unet
+import utils
+import engine
+from learning_rate_range_test import LRTest
 
 def setup_logging(log_dir: str = './logs'):
     """Setup logging configuration."""
@@ -401,9 +401,8 @@ def main():
     config.learning_rate = 1e-4
     config.crop_size = 512
     
-    # Create model (replace with your actual model)
-    # from UNet import Unet
-    # model = Unet(num_classes=config.num_classes)
+
+    model = Unet(num_classes=150)
     
     # For demonstration, using a placeholder
     print("Please uncomment and replace with your actual U-Net model initialization")
@@ -412,15 +411,23 @@ def main():
     
     # Create data loaders
     print("Please uncomment and replace with your actual data loader creation")
-    # train_loader, val_loader = create_data_loaders(config)
+    train_loader, val_loader = create_data_loaders(config)
     
     # Create trainer
-    # trainer = SegmentationTrainer(model, train_loader, val_loader, config)
+    trainer = SegmentationTrainer(model, train_loader, val_loader, config)
     
     # Start training
-    # best_miou = trainer.train()
+    torch.cuda.reset_peak_memory_stats()
+    # Reset memory stats
+    start_time = time.time()
+    best_miou = trainer.train()
+    end_time = time.time()
+    total_time = end_time - start_time
+    peak_memory = torch.cuda.max_memory_allocated() / (1024 ** 2)
+    print(f"Training completed in {total_time:.2f} seconds. Best mIoU: {best_miou:.4f}")
+    print
     
-    print("Training pipeline ready! Uncomment the model and data loader sections to run.")
+ 
 
 if __name__ == "__main__":
     main()
