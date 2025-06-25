@@ -71,7 +71,7 @@ class TrainingConfig:
         self.log_interval = 10
         self.save_interval = 10
 
-        self.data_dir = './ade/ADEChallengeData2016/images'  # ← fixed path
+        self.data_dir = './ade/ADEChallengeData2016/'  # ← fixed path
         self.save_dir = './checkpoints'
         self.log_dir = './logs'
 
