@@ -402,7 +402,7 @@ def main():
     config.crop_size = 512
     
 
-    model = Unet(num_classes=150)
+    model = Unet(no_classes=150)
     
     # For demonstration, using a placeholder
     print("Please uncomment and replace with your actual U-Net model initialization")
